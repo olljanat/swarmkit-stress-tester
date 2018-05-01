@@ -9,9 +9,9 @@ RUN cd /go/src/github.com/docker; \
 
 WORKDIR /go/src/github.com/docker/swarmkit
 RUN make binaries; \
-	make setup
+	make setup; \
+	cp /go/src/github.com/docker/swarmkit/bin/* /usr/local/bin/; \
+	chmod a+x /usr/local/bin/*
 
 COPY /scripts /scripts
-COPY /go/src/github.com/docker/swarmkit/bin /usr/local/bin
-RUN chmod a+x /usr/local/bin/*; \
-	chmod a+x /scripts/*
+RUN chmod a+x /scripts/*

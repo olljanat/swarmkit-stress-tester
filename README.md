@@ -22,6 +22,12 @@ swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock node ls
 swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock service ls
 ```
 
+Add another manager:
+***NOTE!*** currently this breaks whole swarm...
+```bash
+./add-second-manager.sh
+```
+
 
 # Cleanup
 This command will stop all containers and remove content of /tmp/swarmkit-stress-tester
