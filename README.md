@@ -10,11 +10,13 @@ docker run -it -v /var/run/docker.sock:/var/run/docker.sock --rm swarmkit-stress
 ```
 
 # Usage
+## Prepare
 Start containers with script:
 ```bash
 ./start-containers.sh
 ```
 
+## Debug
 Open debug console and check list of nodes and services
 ```bash
 docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester --rm --name debug swarmkit-stress-tester bash
@@ -22,10 +24,15 @@ swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock node ls
 swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock service ls
 ```
 
-Add another manager:
-***NOTE!*** currently this breaks whole swarm...
+## Actual stress tests
+### Running stress test 1
 ```bash
-./add-second-manager.sh
+docker run -it --rm swarmkit-stress-tester /scripts/run-stress-test-1.sh
+```
+
+### Running stress test 2
+```bash
+docker run -it --rm swarmkit-stress-tester /scripts/run-stress-test-2.sh
 ```
 
 

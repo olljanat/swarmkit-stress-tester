@@ -12,6 +12,7 @@ docker network create --driver bridge --subnet=10.10.50.0/24 worker2
 docker run --detach --hostname router --name router \
 	--volume /var/run/docker.sock:/var/run/docker.sock \
 	--volume /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester \
+	--privileged \
 	swarmkit-stress-tester /scripts/router.sh
 
 docker network connect --ip 10.10.10.2 manager1 router
@@ -30,21 +31,21 @@ docker run --detach --hostname manager1 --name manager1 \
 	--network manager1 \
 	swarmkit-stress-tester /scripts/manager1.sh
 	
-# docker run --detach --hostname manager2 --name manager2 \
-	# --volume /var/run/docker.sock:/var/run/docker.sock \
-	# --volume /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester \
-	# --ip 10.10.20.11 \
-	# --privileged \
-	# --network manager2 \
-	# swarmkit-stress-tester /scripts/manager2.sh
+docker run --detach --hostname manager2 --name manager2 \
+	--volume /var/run/docker.sock:/var/run/docker.sock \
+	--volume /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester \
+	--ip 10.10.20.11 \
+	--privileged \
+	--network manager2 \
+	swarmkit-stress-tester /scripts/manager2.sh
 	
-# docker run --detach --hostname manager3 --name manager3 \
-	# --volume /var/run/docker.sock:/var/run/docker.sock \
-	# --volume /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester \
-	# --ip 10.10.30.11 \
-	# --privileged \
-	# --network manager3 \
-	# swarmkit-stress-tester /scripts/manager3.sh
+docker run --detach --hostname manager3 --name manager3 \
+	--volume /var/run/docker.sock:/var/run/docker.sock \
+	--volume /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester \
+	--ip 10.10.30.11 \
+	--privileged \
+	--network manager3 \
+	swarmkit-stress-tester /scripts/manager3.sh
 
 
 # Workers
