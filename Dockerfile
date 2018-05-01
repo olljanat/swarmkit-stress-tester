@@ -4,8 +4,9 @@ RUN apt-get update; \
 	mkdir -p /go/src/github.com/docker
 
 ARG BRANCH=master
+ARG GITHUBACCOUNT=docker
 RUN cd /go/src/github.com/docker; \
-	git clone https://github.com/docker/swarmkit.git -b $BRANCH
+	git clone https://github.com/$GITHUBACCOUNT/swarmkit.git -b $BRANCH
 
 WORKDIR /go/src/github.com/docker/swarmkit
 RUN make binaries; \

@@ -7,7 +7,7 @@ All connections between these goes through router container so it is able genera
 
 # Build test image
 ```bash
-docker build . --build-arg BRANCH=master -t swarmkit-stress-tester
+docker build . --build-arg GITHUBACCOUNT=docker --build-arg BRANCH=master -t swarmkit-stress-tester
 ```
 
 # Usage
