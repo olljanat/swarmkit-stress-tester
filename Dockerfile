@@ -1,24 +1,17 @@
-# Build from sources
-FROM golang as build
+FROM golang
 RUN apt-get update; \
-	apt-get install -y git; \
+	apt-get install -y git net-tools sudo; \
 	mkdir -p /go/src/github.com/docker
 
 ARG BRANCH=master
 RUN cd /go/src/github.com/docker; \
-	git clone https://github.com/docker/swarmkit.git -b $BRANCH; \
-	cd /go/src/github.com/docker/swarmkit; \
-	make binaries
-	
-RUN cd /go/src/github.com/docker/swarmkit; \
-	make setup; \
-	make all
+	git clone https://github.com/docker/swarmkit.git -b $BRANCH
 
-# Create docker image
-FROM golang
-RUN apt-get update; \
-	apt-get install -y net-tools sudo
+WORKDIR /go/src/github.com/docker/swarmkit
+RUN make binaries; \
+	make setup
+
 COPY /scripts /scripts
-COPY --from=build /go/src/github.com/docker/swarmkit/bin /usr/local/bin
+COPY /go/src/github.com/docker/swarmkit/bin /usr/local/bin
 RUN chmod a+x /usr/local/bin/*; \
 	chmod a+x /scripts/*

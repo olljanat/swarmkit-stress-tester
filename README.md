@@ -4,6 +4,11 @@
 docker build . --build-arg BRANCH=master -t swarmkit-stress-tester
 ```
 
+Run tests coming with Swarmkit
+```bash
+docker run -it -v /var/run/docker.sock:/var/run/docker.sock --rm swarmkit-stress-tester make all
+```
+
 # Usage
 Start containers with script:
 ```bash
@@ -16,9 +21,6 @@ docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/swarmkit-str
 swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock node ls
 swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock service ls
 ```
-
-```bash
-Create some se
 
 
 # Cleanup
