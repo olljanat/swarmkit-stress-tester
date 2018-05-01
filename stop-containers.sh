@@ -21,5 +21,5 @@ docker network rm manager1
 
 sudo rm -rf /tmp/swarmkit-stress-tester/
 
-docker rm --force $(docker ps --filter name=foo* -q)
-docker rm --force $(docker ps --filter name=bar* -q)
+docker rm --force $(docker ps --filter name=foo* -a -q)
+docker rm --force $(docker ps --filter name=bar* -a -q)
