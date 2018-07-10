@@ -32,20 +32,30 @@ Open bash inside of router container:
 docker exec -it router bash
 ```
 
-### Running stress test 1
+### Running stress test
 ```bash
-/scripts/run-stress-test-1.sh
+/scripts/run-stress-test.sh
 ```
 
-### Running stress test 2
+## Debug
+Open debug console and check list of nodes and services
 ```bash
-/scripts/run-stress-test-2.sh
+docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester --rm --name debug swarmkit-stress-tester bash
+swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock node ls
+swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock service ls
+
+# Try get logs from service and see that they fail
+swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock service logs bar
+swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock service logs foo
 ```
 
-### Running stress test 3
+## Workaround
+Workaround to issue is restart all managers one by one.
+You can do that using command:
 ```bash
-/scripts/run-stress-test-3.sh
+./workaround.sh
 ```
+
 
 # Cleanup
 This command will stop all containers and remove content of /tmp/swarmkit-stress-tester
