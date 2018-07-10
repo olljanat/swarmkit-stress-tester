@@ -5,9 +5,10 @@ These scripts creates three managers + two workers configuration over single doc
 All connections between these goes through router container so it is able generate connection failures between swarm nodes.
 ![](architecture.png)
 
-# Build test image
+# Build test images
 ```bash
 docker build . --build-arg GITHUBACCOUNT=docker --build-arg BRANCH=master -t swarmkit-stress-tester
+docker build test-service -t test-service
 ```
 
 # Usage
@@ -41,6 +42,10 @@ docker exec -it router bash
 /scripts/run-stress-test-2.sh
 ```
 
+### Running stress test 3
+```bash
+/scripts/run-stress-test-3.sh
+```
 
 # Cleanup
 This command will stop all containers and remove content of /tmp/swarmkit-stress-tester

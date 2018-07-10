@@ -16,3 +16,5 @@ RUN make binaries; \
 
 COPY /scripts /scripts
 RUN chmod a+x /scripts/*
+WORKDIR /
+
