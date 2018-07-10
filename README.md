@@ -18,14 +18,6 @@ Start containers with script:
 ./start-containers.sh
 ```
 
-## Debug
-Open debug console and check list of nodes and services
-```bash
-docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v /tmp/swarmkit-stress-tester:/tmp/swarmkit-stress-tester --rm --name debug swarmkit-stress-tester bash
-swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock node ls
-swarmctl -s /tmp/swarmkit-stress-tester/manager1.sock service ls
-```
-
 ## Actual stress tests
 Open bash inside of router container:
 ```bash
